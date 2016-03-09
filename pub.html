@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>react-router-redux basic example</title>
+  <meta charset="utf8"/>
+</head>
+<body>
+<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+<button onclick="publish()">Publish</button>
+<script>
+  var myFirebaseRef = new Firebase("https://luminous-inferno-482.firebaseio.com");
+
+  var publish = function () {
+    myFirebaseRef.child('event').push({
+      type: "message",
+      author: "Hello!"
+    });
+  };
+</script>
+</body>
+</html>
