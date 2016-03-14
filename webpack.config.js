@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 //const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 var webPackConfig = {
-  //devtool: 'source-map',
+  devtool: 'source-map',
   entry: [
     './index.js'
   ],
@@ -57,12 +57,18 @@ var webPackConfig = {
       }
     ]
   },
-  plugins: []
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery"
+    })
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
   webPackConfig.plugins.push(new CleanWebpackPlugin(['dist']))
-  webPackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin())
+  //webPackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin())
   webPackConfig.plugins.push(new HtmlWebpackPlugin({
     filename: 'index.html',
     template: './templates/index.html',
